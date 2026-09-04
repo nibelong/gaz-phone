@@ -1,9 +1,9 @@
 /* global RGB_player */
  RGB_player(
-  'iRidium Server',
+  serverName,
   'KNX.5/2/2 Gr1  Red  VAL',
   'KNX.5/2/2 Gr1  Green  VAL',
   'KNX.5/2/2 Gr1  Blue  VAL',
   100,
-  IR.GetPopup("Room 26").GetItem("color_picker")
+  IR.GetPopup("light-remote-RGB room 26").GetItem("color_picker")
 )

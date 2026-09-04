@@ -7,16 +7,8 @@ function getColorTextAlarm(value){
 
 IR.AddListener(IR.EVENT_START, 0, function () {
 
-  IR.SetVariable("Tokens.mainMenuValue",0);
-  IR.SetVariable("Tokens.generalMenuValue",0);
-  IR.SetVariable("Tokens.gardenMenuValue",0);
-  IR.SetVariable("Tokens.serviceManuValue",0);
-  IR.SetVariable("Tokens.cameraMenuValue",0)
-  IR.SetVariable("Tokens.cameraJK",0);
-  IR.SetVariable("Tokens.musicSourceSelect", 2)
-
-  IR.SetVariable("Tokens.musicOuputSelect",1);
-
+  IR.SetVariable("Tokens.textHeader", "Обзор" );
+  IR.SetVariable("Tokens.menuValue", 0);
 
 
   var defaultCamera = IR.CreateImage("Camera 1", {URI: "rtsp://admin:ArtiS7031055@192.168.66.31:554/ISAPI/Streaming/Channels/102",
@@ -29,8 +21,8 @@ IR.AddListener(IR.EVENT_START, 0, function () {
     ScaleHeight: 768
   });
 
-  IR.GetPopup("camera_RemotePage").GetItem("camera_Image").GetState(0).Image = defaultCamera;
-  IR.GetPopup("camera_FullImage").GetItem("camera_Image").GetState(0).Image = defaultCamera;
+  // IR.GetPopup("camera_RemotePage").GetItem("camera_Image").GetState(0).Image = defaultCamera;
+  // IR.GetPopup("camera_FullImage").GetItem("camera_Image").GetState(0).Image = defaultCamera;
 
 
   yearChange();

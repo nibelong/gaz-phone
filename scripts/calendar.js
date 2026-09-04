@@ -1,5 +1,5 @@
 /* GUI variables */
-var page = IR.GetItem('calendar');
+var page = IR.GetPopup('logs-calendar');
 var labelMonth = page.GetItem('month');
 var labelYear = page.GetItem('year');
 var buttonNext = page.GetItem('next');

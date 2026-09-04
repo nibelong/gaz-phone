@@ -26,6 +26,7 @@
       "scripts/animation-page.js",
       "scripts/animation-popup.js",
       "scripts/global.js",
+      "scripts/calendar.js",
       "scripts/app.js",
       "scripts/rempte-control.js",
       "scripts/light-spa.js",
@@ -33,7 +34,6 @@
       "scripts/navigation-menu.js",
       "scripts/auto-watering.js",
       "scripts/ecler-player.js",
-      "scripts/calendar.js",
       "scripts/lock-control.js"
     ],
     "dependenciesOrder": [

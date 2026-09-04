@@ -4,5 +4,5 @@ RGB_player(
   'KNX.sauna value green',
   'KNX.sauna value blue',
   100,
-  IR.GetPopup("Room 11").GetItem("color_picker")
+  IR.GetPopup("light-remote-RGB room 11").GetItem("color_picker")
 )
