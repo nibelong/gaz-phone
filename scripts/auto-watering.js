@@ -116,7 +116,7 @@ function setWeekDayZone1(){
       var currentDayValue = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.weekDayZone 1")
       var newDayWeek = setBitValueSafe(currentDayValue, i, dayValue);
       IR.SetVariable("Drivers.iRidium Server.Modbus RTU.weekDayZone 1", newDayWeek)
-      IR.GetDevice("iRidium Server").Set("Modbus RTU.weekDayZone 1", newDayWeek)
+      server.Set("Modbus RTU.weekDayZone 1", newDayWeek)
     }
   }
 }
@@ -132,7 +132,7 @@ function setWeekDayZone2(){
       var currentDayValue = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.weekDayZone 2")
       var newDayWeek = setBitValueSafe(currentDayValue, i, dayValue);
       IR.SetVariable("Drivers.iRidium Server.Modbus RTU.weekDayZone 2", newDayWeek)
-      IR.GetDevice("iRidium Server").Set("Modbus RTU.weekDayZone 2", newDayWeek)
+      server.Set("Modbus RTU.weekDayZone 2", newDayWeek)
     }
   }
 }
@@ -153,19 +153,19 @@ function setWeekDayZone3(){
 }
 
 
-var lastCallfunctionTime = undefined;
+var lastCallFunctionTime = undefined;
 
 function callTimeSelector(){
-  var namesection = this.Name;
-  IR.Log(namesection)
-  var label = IR.GetItem("garden_AutoWatering").GetItem(namesection).Text;
+  var nameSection = this.Name;
+  IR.Log(nameSection)
+  var label = IR.GetItem("garden_AutoWatering").GetItem(nameSection).Text;
   IR.Log(label);
   IR.GetPopup("gardenSetTime").GetItem('nameZone').GetState(0).Text = label;
-  lastCallfunctionTime = namesection;
-  var hourOn = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.on_h_" + namesection);
-  var minOn = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.on_m_" + namesection);
-  var hourOff = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.off_h_" + namesection);
-  var minOff = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.off_m_" + namesection);
+  lastCallFunctionTime = nameSection;
+  var hourOn = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.on_h_" + nameSection);
+  var minOn = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.on_m_" + nameSection);
+  var hourOff = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.off_h_" + nameSection);
+  var minOff = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.off_m_" + nameSection);
 
   pLeft1.Position = +hourOn === 0 ? 23 : +hourOn -1
   pLeft2.Position = +minOn === 0 ? 59 : +minOn -1
@@ -186,11 +186,11 @@ function confirmationSelectorTime(){
   var hourOff = IR.GetVariable("Tokens.hourOff");
   var minOff = IR.GetVariable("Tokens.minOff");
 
-  IR.GetDevice("iRidium Server").Set("Modbus RTU.on_h_" + lastCallfunctionTime, hourOn)
-  IR.GetDevice("iRidium Server").Set("Modbus RTU.on_m_" + lastCallfunctionTime, minOn)
-  IR.GetDevice("iRidium Server").Set("Modbus RTU.off_h_" + lastCallfunctionTime, hourOff)
-  IR.GetDevice("iRidium Server").Set("Modbus RTU.off_m_" + lastCallfunctionTime, minOff)
-  lastCallfunctionTime = undefined;
+  server.Set("Modbus RTU.on_h_" + lastCallFunctionTime, hourOn)
+  server.Set("Modbus RTU.on_m_" + lastCallFunctionTime, minOn)
+  server.Set("Modbus RTU.off_h_" + lastCallFunctionTime, hourOff)
+  server.Set("Modbus RTU.off_m_" + lastCallFunctionTime, minOff)
+  lastCallFunctionTime = undefined;
   IR.HidePopup('gardenSetTime')
 
 }
