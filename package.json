@@ -1,0 +1,42 @@
+{
+    "name": "gaz-phone",
+    "version": "0.0.0",
+    "description": "service automation",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "eslint": "^6.8.0",
+      "eslint-config-airbnb-base": "^14.1.0",
+      "eslint-plugin-import": "^2.20.2",
+      "eslint-plugin-jsdoc": "^4.6.0",
+      "grunt": "^1.0.4",
+      "iridium-grunt": "github:bladerunner2020/iridium-grunt"
+    },
+    "dependencies": {
+      "js-ext": "git+ssh://git@github.com/bladerunner2020/js-ext.git"
+    },
+    "projectScripts": [
+      "scripts/animation-lib.js",
+      "scripts/light-lib.js",
+      "scripts/animation-page.js",
+      "scripts/animation-popup.js",
+      "scripts/global.js",
+      "scripts/app.js",
+      "scripts/rempte-control.js",
+      "scripts/light-spa.js",
+      "scripts/light-house.js",
+      "scripts/navigation-menu.js",
+      "scripts/auto-watering.js",
+      "scripts/ecler-player.js",
+      "scripts/calendar.js",
+      "scripts/lock-control.js"
+    ],
+    "dependenciesOrder": [
+      "js-ext"
+    ]
+  }
