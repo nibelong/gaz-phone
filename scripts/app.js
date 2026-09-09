@@ -43,10 +43,10 @@ IR.AddListener(IR.EVENT_TAG_CHANGE, server, function(name, value) {
     IR.Log(value);
     IR.SetVariable('Tokens.AlarmList', value);
   }else if(name === 'KNX.autowatering_alarm_low_temp'){
-    IR.GetPopup("garden_AutoWatering").GetItem("value_Temp 2").GetState(0).TextColor = getColorTextAlarm(value);
+    garden.GetItem("value_Temp 2").GetState(0).TextColor = getColorTextAlarm(value);
   }else if(name === 'autowatering_alarm_hight_temp'){
-    IR.GetPopup("garden_AutoWatering").GetItem("value_Temp 2").GetState(0).TextColor = getColorTextAlarm(value);
+    garden.GetItem("value_Temp 2").GetState(0).TextColor = getColorTextAlarm(value);
   }else if(name === 'KNX.autowatering_alarm_co2_sensor'){
-    IR.GetPopup("garden_AutoWatering").GetItem("CO2").GetState(0).Textolor = getColorTextAlarm(value);
+    garden.GetItem("CO2").GetState(0).Textolor = getColorTextAlarm(value);
   }
 });

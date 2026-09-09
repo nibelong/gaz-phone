@@ -1,5 +1,44 @@
 var hoursItems = [];
 
+var listNameZone = {
+  section1Zone1:{
+    nameZone: "Зона 1",
+    nameSection: "Интенрвал полива 1"
+  },
+  section2Zone1:{
+    nameZone: "Зона 1",
+    nameSection: "Интенрвал полива 2"
+  },
+  section3Zone1:{
+    nameZone: "Зона 1",
+    nameSection: "Интенрвал полива 3"
+  },
+  section1Zone2:{
+    nameZone: "Зона 2",
+    nameSection: "Интенрвал полива 1"
+  },
+  section2Zone2:{
+    nameZone: "Зона 2",
+    nameSection: "Интенрвал полива 2"
+  },
+  section3Zone2:{
+    nameZone: "Зона 2",
+    nameSection: "Интенрвал полива 3"
+  },
+  section1Zone3:{
+    nameZone: "Зона 3",
+    nameSection: "Интенрвал подсветки 1"
+  },
+  section2Zone3:{
+    nameZone: "Зона 3",
+    nameSection: "Интенрвал подсветки 2"
+  },
+  section3Zone3:{
+    nameZone: "Зона 3",
+    nameSection: "Интенрвал подсветки 3"
+  },
+}
+
 for(var i = 0; i <= 23; i++){
   var hour = i;
   if( i < 10){
@@ -20,7 +59,7 @@ for(var i = 0; i <= 59; i++){
 }
 
 
-var pickerPopup = IR.GetItem('gardenSetTime');
+var pickerPopup = IR.GetItem('bg-popup-remote-time');
 var leftP1 = pickerPopup.GetItem('_Left1');
 var leftP2 = pickerPopup.GetItem('_Left2');
 var rightP1 = pickerPopup.GetItem('_Right1');
@@ -158,9 +197,13 @@ var lastCallFunctionTime = undefined;
 function callTimeSelector(){
   var nameSection = this.Name;
   IR.Log(nameSection)
-  var label = IR.GetItem("garden_AutoWatering").GetItem(nameSection).Text;
-  IR.Log(label);
-  IR.GetPopup("gardenSetTime").GetItem('nameZone').GetState(0).Text = label;
+  var section = nameSection.replace(/[\s_]/g, "");
+  var nameZone = listNameZone[section].nameZone;
+  var namePartZone = listNameZone[section].nameSection;
+
+  pickerPopup.GetItem('zone').GetState(0).Text = nameZone
+  pickerPopup.GetItem('section').GetState(0).Text = namePartZone
+
   lastCallFunctionTime = nameSection;
   var hourOn = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.on_h_" + nameSection);
   var minOn = IR.GetVariable("Drivers.iRidium Server.Modbus RTU.on_m_" + nameSection);
@@ -176,7 +219,8 @@ function callTimeSelector(){
   IR.SetVariable("Tokens.minOn",minOn );
   IR.SetVariable("Tokens.hourOff",hourOff );
   IR.SetVariable("Tokens.minOff", minOff);
-  IR.ShowPopup('gardenSetTime');
+  IR.ShowPopup('bg-popup-darkBlur');
+  IR.ShowPopup('bg-popup-remote-time');
 }
 
 
@@ -191,7 +235,8 @@ function confirmationSelectorTime(){
   server.Set("Modbus RTU.off_h_" + lastCallFunctionTime, hourOff)
   server.Set("Modbus RTU.off_m_" + lastCallFunctionTime, minOff)
   lastCallFunctionTime = undefined;
-  IR.HidePopup('gardenSetTime')
+  IR.HidePopup('bg-popup-darkBlur')
+  IR.HidePopup('bg-popup-remote-time')
 
 }
 

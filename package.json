@@ -25,6 +25,7 @@
       "scripts/light-lib.js",
       "scripts/animation-page.js",
       "scripts/animation-popup.js",
+      "scripts/standart-dialogs.js",
       "scripts/global.js",
       "scripts/calendar.js",
       "scripts/app.js",

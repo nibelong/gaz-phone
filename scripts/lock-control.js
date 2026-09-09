@@ -1,19 +1,23 @@
-function lockSpaToogle(){
+/**
+ * Function for remote lock spa.
+ */
+function lockSpaToggle(){
   var textMessage = "Заблокрироватиь дверь в Бане?"
+  var location = "Баня";
+  var partName = "Дверной замок";
   var lock = IR.GetVariable("Drivers.iRidium Server.KNX.0/2/1 SPA Lock Door FB");
+
   if(!lock){
     textMessage = "Разблокрироватиь дверь в Бане?"
   }
-  IR.GetPopup("ConfiramationBox").GetItem("Message").Text = textMessage
-  IR.ShowPopup('ConfiramationBox');
+
+  Ask(textMessage,location, partName, function() {
+    var currentValue = IR.GetVariable("Drivers.iRidium Server.KNX.0/2/1 SPA Lock Door FB");
+    server.Set("KNX.0/2/1 SPA Lock Door", !currentValue)
+  });
+
 }
 
-
-function pressSaveSpaMessageBox(){
-  var lock = IR.GetVariable("Drivers.iRidium Server.KNX.0/2/1 SPA Lock Door FB");
-  IR.HidePopup('ConfiramationBox');
-  IR.GetDevice("iRidium Server").Set("KNX.0/2/1 SPA Lock Door", !lock)
-}
 
 
 
@@ -21,21 +25,18 @@ function pressSaveSpaMessageBox(){
 function lockSecurityToggle(){
   var textMessage = "Заблокрироватиь дверь на Охране?"
   var lock = IR.GetVariable("Drivers.iRidium Server.KNX.lock-fix-status-security")
+  var location = "Гараж";
+  var partName = "Замок охраны";
+
   if(!lock){
     textMessage = "Разблокрироватиь дверь на Охране?"
   }
-  IR.GetPopup("ConfiramationBox 1").GetItem("Message").Text = textMessage
-  IR.ShowPopup('ConfiramationBox 1');
+
+  Ask(textMessage,location, partName, function() {
+    var currentValue = IR.GetVariable("Drivers.iRidium Server.KNX.lock-fix-status-security")
+    server.Set("KNX.lock-fix-security", !currentValue)
+  });
 }
-
-
-
-function pressSaveSecurityMessageBox(){
-  var lock = IR.GetVariable("Drivers.iRidium Server.KNX.lock-fix-status-security")
-  IR.GetDevice("iRidium Server").Set("KNX.lock-fix-security", !lock)
-  IR.HidePopup('ConfiramationBox 1');
-}
-
 
 
 
@@ -43,17 +44,16 @@ function pressSaveSecurityMessageBox(){
 function lockGarageToggle(){
   var textMessage = "Заблокировать дверь в Гараже?"
   var lock = IR.GetVariable("Drivers.iRidium Server.KNX.lock-fix-status-gan")
+  var location = "Гараж";
+  var partName = "Дверной замок";
 
   if(!lock){
     textMessage = "Разблокрироватиь дверь в Гараже?"
   }
-  IR.GetPopup("ConfiramationBox 2").GetItem("Message").Text = textMessage
-  IR.ShowPopup('ConfiramationBox 2');
-}
 
+  Ask(textMessage,location, partName, function() {
+    var lock = IR.GetVariable("Drivers.iRidium Server.KNX.lock-fix-status-gan")
+      server.Set("KNX.lock-fix-gan", !lock)
+  });
 
-function pressSaveGarageMessageBox(){
-  var lock = IR.GetVariable("Drivers.iRidium Server.KNX.lock-fix-status-gan")
-  IR.GetDevice("iRidium Server").Set("KNX.lock-fix-gan", !lock)
-  IR.HidePopup('ConfiramationBox 2');
 }
